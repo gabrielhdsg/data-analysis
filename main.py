@@ -17,16 +17,16 @@ table = table.dropna(how="any",axis=0)
 table = table.drop("Unnamed: 0", axis=1)
 
 #------------------------------------------------------------------------------------------------------------------------
-#Initial analysis
+#initial analysis
 
 #counting how many people have cancelled - normalize transform the numbers in percent
 print(table["Churn"].value_counts(normalize=True).map("{:.1%}".format))
 
 #------------------------------------------------------------------------------------------------------------------------
-#Compare each column with Churn
+#compare each column with Churn
 
 #create graph
-graph = px.histogram(table, x="Aposentado", color="Churn", text_auto=True)
-
-#show graph
-graph.show()
+for column in table.columns:
+    graph = px.histogram(table, x=column, color="Churn", text_auto=True)
+    #show graph
+    graph.show()
